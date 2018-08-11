@@ -3,129 +3,161 @@
     <head>
         <title>X-Cutioner's Song</title>
 
-        <link 
-        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet"/>
-        <link 
-        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" rel="text/javascript"/>
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet"/>
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" rel="text/javascript"/>
 
-        <link href="app.css" rel="stylesheet"/>
+        <link href="content/app.css" rel="stylesheet"/>
+
+        <script src="https://code.jquery.com/jquery-1.10.2.js" type="application/javascript"></script> 
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular.min.js"></script> 
+
+        <script src="http://code.angularjs.org/1.0.3/angular-sanitize.js"></script>
+ 
+        <script src="scripts/app.js" type="application/javascript"></script> 
+
+        <script src="scripts/MainController.js" type="application/javascript"></script> 
+
     </head>
     
-    <body>
-        <header class="container-fluid">
-            <h1>X-Cutioner's Song Web Application</h1>
-        </header>
-
-        <nav class="container-fluid">
-            <ul class="nav navbar-inverse navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="https://en.wikipedia.org/wiki/X-Men">X-Men</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-
-        
-        <div class="container-fluid">
-            <div class="row">
-
-                <section class="col-sm-6 col-sm-push-3">
-                    <div class="row">
+    <body onload="onLoad()" ng-app="angularApp">
 
 
-                        <article >
-                            <h2>Plot</h2>
+        <div ng-controller="MainController">
 
-                            <div class="col-sm-3">
-                                <img src="https://upload.wikimedia.org/wikipedia/en/7/7c/X-Cutioner%27s_Song_Cover.jpg"/>
+            <header class="container-fluid"> 
+                <h1>X-Cutioner's Song Web Application</h1>
+            </header>
+
+
+            <nav class="container-fluid">
+                <ul class="nav navbar-inverse navbar-nav">
+
+                    <li class="active"><a href="#">Home</a></li>
+                    <li><a href="https://en.wikipedia.org/wiki/X-Men">X-Men</a></li>
+                    <li><a href="#contact">Contact</a></li>
+
+                    
+                </ul>
+            </nav>
+
+            
+            <div class="container-fluid">
+                <div class="row">
+
+                    <section class="col-sm-6 col-sm-push-3">
+
+
+                        <!--Time dilation calculation part-->
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label2>Percentage of c:</label2><input ng-model="percentageofc" type="text">
+                                <button ng-click="calculateTimeDilation()">Calculate</button>
+                                <p></p>
+                                    
+                                        {{ dilatedTimeMessage1 }}
+                                        <input type="text" id="dilatedtimehtml">
+                                        {{ dilatedTimeMessage2 }}
+                                    
+                                <p></p>
+                            </div>
+                        </div>
+
+
+
+                        <div class="row">
+
+                            <div class="col-sm-4">
+                                <input ng-model="smallnumber" type="text">
+                                <p>{{ theMessage }}</p>
+                                <button ng-click="checkNumber()">Submit</button>
                             </div>
 
-                            <div class="col-sm-9">
-                                <p>Mutant pop-star Lila Cheney organizes a free concert in Central Park to promote diversity in society and invites Professor Charles Xavier to speak at the concert. His speech is interrupted by Stryfe who, disguised as his doppelganger and nemesis Cable, shoots Xavier with a bullet that infects the professor with a lethal strain of the Techno-organic virus.</p>
-                                <p>Meanwhile, War and Famine, the Horsemen of Apocalypse, attack Iceman and Colossus, distracting them from Caliban, who kidnaps Cyclops and Jean Grey. The Horsemen are working for Mr. Sinister, who is impersonating the Horsemen's former master Apocalypse. Mr. Sinister organized the kidnapping as part of his newly formed alliance with Stryfe. Stryfe trades Mr. Sinister a canister containing the past and future Summers family DNA history, and receives Jean Grey and Cyclops in the exchange.</p> 
+                            <div class="col-sm-8">
+                                
+                                <label>FirstName</label><input ng-model="User.firstName" type="text"
+                                ng-model-options="{ getterSetter: true }" /></br>
+
+                                <label>LastName</label><input ng-model="User.lastName" type="text"
+                                ng-model-options="{ getterSetter: true }" /></br>
+
+                                <label>FullName</label><span ng-bind="User.fullName()"></span>
+
                             </div>
-                        </article>
+                        </div>
+
+                        
+                        <div class="row">
+                                <article ng-repeat="article in Articles">
+                                    <h2>{{ article.Title }}</h2>
+                                    <div class="col-sm-3">
+                                        <img ng-src="{{ article.Image }}" />
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <div ng-bind-html="article.Body"></div>
+                                    </div>
+                                </article>
+                        </div>
 
 
-                        <article>
-                            <h2>Epilogue</h2>
+                    </section>
 
-                            <div class="col-sm-3">
-                                <img src="https://upload.wikimedia.org/wikipedia/en/7/7c/X-Cutioner%27s_Song_Cover.jpg"/>
-                            </div>
+                    <aside class="col-sm-3 col-sm-pull-6">
+                        <h2 class= "title">Main Characters</h2>
+                        <ul>
+                            <li><a href="https://en.wikipedia.org/wiki/X-Men">X-Men</a></li>
+                            <li><a href="https://en.wikipedia.org/wiki/X-Force">X-Force</a></li>
+                            <li><a href="https://en.wikipedia.org/wiki/X-Factor_(comics)">X-Factor</a></li>
+                            <li><a href="https://en.wikipedia.org/wiki/Mutant_Liberation_Front">Mutant Liberation Front</a></li>
+                            <li><a href="https://en.wikipedia.org/wiki/Stryfe">Stryfe</a></li>
+                        </ul>
+                    </aside>
 
-                            <div class="col-sm-9">
-                                <p>Professor X discovers that the techno-organic virus has left him temporarily capable of walking and spends his few hours without paralysis bonding with Jubilee. Rogue and Gambit hang out together as Rogue agrees to let Gambit be her "eyes" until she regains her sight, laying the groundwork for the two finally becoming a couple.</p> 
-                                <p>Archangel and Beast rebuild the bar that Cyclops and Jean Grey were kidnapped in and think back to their days as the original X-Men. </p>
-                            </div>
-                        </article>
-
-
-                        <article>
-                            <h2>Stryfe's Strike File</h2>
-
-                            <div class="col-sm-3">
-                                <img src="https://upload.wikimedia.org/wikipedia/en/7/7c/X-Cutioner%27s_Song_Cover.jpg"/>
-                            </div>
-
-                            <div class="col-sm-9">
-                                <p>Stryfe's Strike File was the name of a 1993 X-Men one-shot written by Fabian Nicieza and Scott Lobdell. It included several years worth of foreshadowing of Lobdell and Nicieza's X-Men plotlines, most notably the Legacy Virus plotline. The comic framing device was that the files in the one-shot were on a CD-ROM found at Stryfe's base by Bishop and handed over to Xavier without telling anyone else about it. After nearly two dozen pages of text and picture files, most of which were taken from the trading card inserts included in the individual issues of the crossover, the book ended with a closing sequence where Xavier destroys the disk rather than showing it to Cyclops and Jean Grey.</p>
-                                <p>The book contained entries for Graydon Creed, Threnody, and Holocaust prior to their first appearances elsewhere. Graydon Creed would appear as a villain two months later, Threnody would appear eleven months late, yet Holocaust would not appear in the X-Men comics until the alternate reality Age of Apocalypse storyline. The version found in that storyline differs from the one found in Stryfe's Strike File in that the Age of Apocalypse Holocaust requires a containment suit and is very talkative while the Holocaust in the files does not need a containment suit and is a silent killer.</p>
-                            </div>
-                        </article>
-
-                    </div>
-                </section>
-
-                <aside class="col-sm-3 col-sm-pull-6">
-                    <h2 class= "title">Main Characters</h2>
-                    <ul>
-                        <li><a href="https://en.wikipedia.org/wiki/X-Men">X-Men</a></li>
-                        <li><a href="https://en.wikipedia.org/wiki/X-Force">X-Force</a></li>
-                        <li><a href="https://en.wikipedia.org/wiki/X-Factor_(comics)">X-Factor</a></li>
-                        <li><a href="https://en.wikipedia.org/wiki/Mutant_Liberation_Front">Mutant Liberation Front</a></li>
-                        <li><a href="https://en.wikipedia.org/wiki/Stryfe">Stryfe</a></li>
-                    </ul>
-                </aside>
-
-                
-                <aside class="col-sm-3">
-                    <h2>Publication</h2>
-                    <ol id="orderedlist">
-                        <li>Uncanny X-Men #294</li>
-                        <li>X-Factor #84</li>
-                        <li>X-Men (vol. 2) #14</li>
-                        <li>X-Force #16</li>
-                        <li>Uncanny X-Men #295</li>
-                        <li>X-Factor #85</li>
-                        <li>X-Men (vol. 2) #15</li>
-                        <li>X-Force #17</li>
-                        <li>Uncanny X-Men #296</li>
-                        <li>X-Factor #86</li>
-                        <li>X-Men (vol. 2) #16</li>
-                        <li>X-Force #18</li>
-                        <li>Uncanny X-Men #297 (Epilogue)</li>
-                        <li>X-Force #19 (Epilogue)</li>
-                        <li>"Stryfe's Strike File"</li>
-                    </ol>
-                </aside>
-            </div>
-        </div>
-
-        <div class="container-fluid">
-            <div class "row">
-                <div class="col-sm-6 col-sm-push-3"></div>
-                <div class="col-sm-6 col-sm-pull-3">
-                    <a name="contact">Contact Me</a>
-                    <p>Twitter:</p>
-                    <p>@Painsketch</p>
+                    
+                    <aside class="col-sm-3">
+                        <h2>Publication</h2>
+                        <ol id="orderedlist">
+                            <li>Uncanny X-Men #294</li>
+                            <li>X-Factor #84</li>
+                            <li>X-Men (vol. 2) #14</li>
+                            <li>X-Force #16</li>
+                            <li>Uncanny X-Men #295</li>
+                            <li>X-Factor #85</li>
+                            <li>X-Men (vol. 2) #15</li>
+                            <li>X-Force #17</li>
+                            <li>Uncanny X-Men #296</li>
+                            <li>X-Factor #86</li>
+                            <li>X-Men (vol. 2) #16</li>
+                            <li>X-Force #18</li>
+                            <li>Uncanny X-Men #297 (Epilogue)</li>
+                            <li>X-Force #19 (Epilogue)</li>
+                            <li>"Stryfe's Strike File"</li>
+                        </ol>
+                    </aside>
                 </div>
             </div>
+
+            <div class="container-fluid">
+                <div class "row">
+                    <div class="col-sm-3"></div>
+                    <div class="col-sm-5">
+                        <a name="contact" href="https://twitter.com/painsketch">Contact Me</a>
+                        <p></p>
+                        <p>Twitter:</p>
+                        <p>@Painsketch</p>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <footer class="container-fluid">
+                ISBN 0-7851-0025-3
+
+                <p>{{ timestamp }}</p>
+    
+            </footer>
         </div>
-
-
-        <footer class="container-fluid">
-            ISBN 0-7851-0025-3
-        </footer>
 
     </body>
 </html>
